@@ -1,66 +1,26 @@
-## Foundry
+# TidalDex
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+0 fee p2p dex with no governance
 
-Foundry consists of:
+## Deployments
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+### BSC Testnet
 
-## Documentation
+| Contract                          | Address                                    |
+| --------------------------------- | ------------------------------------------ |
+| Factory                           | 0x89A85a443a3c4707d0d186A4766b641681219D79 |
 
-https://book.getfoundry.sh/
+### BSC Mainnet
 
-## Usage
+| Contract                          | Address                                    |
+| --------------------------------- | ------------------------------------------ |
+| Factory                           | 0x89A85a443a3c4707d0d186A4766b641681219D79 |
 
-### Build
+## build
+forge build --via-ir
 
-```shell
-$ forge build
-```
+## deployment
 
-### Test
+Key variables are set in the script, and should be updated correctly for the network.
 
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+forge script script/v2/DeployTenXLaunch.s.sol:DeployTenXLaunch --broadcast --verify -vvv --rpc-url $RPC_URL --etherscan-api-key $ETHERSCAN_API_KEY -i 1 --sender $DEPLOYER_ADDRESS

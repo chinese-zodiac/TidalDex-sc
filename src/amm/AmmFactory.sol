@@ -15,8 +15,8 @@ contract AmmFactory is IAmmFactory {
         public getPair;
     address[] public allPairs;
 
-    constructor(address _feeToSetter) {
-        feeToSetter = _feeToSetter;
+    constructor() {
+        feeToSetter = address(0x0);
     }
 
     function allPairsLength() external view returns (uint) {

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.8.19;
 
-import "./Whitelist.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import "../interfaces/IAmmPair.sol";
 import "../interfaces/IAmmTwapOracle.sol";
 import "./lib/FixedPoint.sol";
@@ -13,7 +13,7 @@ import "./lib/AmmOracleLibrary.sol";
 // note this is a singleton oracle and only needs to be deployed once per desired parameter
 // the goal of this oracle is to be always available under all possible update conditions
 // oracle will always use data published outside of the current block
-contract AmmTwapOracle is Whitelist, IAmmTwapOracle {
+contract AmmTwapOracle is Ownable, IAmmTwapOracle {
     using FixedPoint for *;
 
     struct Observation {
@@ -39,7 +39,7 @@ contract AmmTwapOracle is Whitelist, IAmmTwapOracle {
 
     event UpdatePeriodSize(uint32 old_period_size, uint32 period_size);
 
-    constructor(address factory_, uint32 periodSize_) Whitelist(msg.sender) {
+    constructor(address factory_, uint32 periodSize_) Ownable(msg.sender) {
         require(
             periodSize_ > 1 minutes,
             "periodSize must be greater than 60 seconds"
@@ -54,7 +54,7 @@ contract AmmTwapOracle is Whitelist, IAmmTwapOracle {
     //Update minimum period before update of a pair
     function updatePeriodSize(
         uint32 periodSize_
-    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    ) external onlyOwner {
         require(
             periodSize_ > 1 minutes,
             "periodSize must be greater than 60 seconds"
@@ -67,7 +67,7 @@ contract AmmTwapOracle is Whitelist, IAmmTwapOracle {
 
     // performs chained update calculations on any number of pairs
     //whitelisted to avoid DDOS attacks since new pairs will be registered
-    function updatePath(address[] memory path) public onlyWhitelisted {
+    function updatePath(address[] memory path) public onlyOwner {
         require(path.length >= 2, "AmmLibrary: INVALID_PATH");
         for (uint i; i < path.length - 1; i++) {
             update(path[i], path[i + 1]);
@@ -113,7 +113,7 @@ contract AmmTwapOracle is Whitelist, IAmmTwapOracle {
 
         require(
             observation.timestamp > 0,
-            "PcsPeriodicOracle: PAIR_UNINITIALIZED"
+            "AmmTwapOracle: PAIR_UNINITIALIZED"
         );
 
         (address token0, ) = AmmLibrary.sortTokens(tokenIn, tokenOut);

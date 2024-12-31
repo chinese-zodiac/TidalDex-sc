@@ -210,9 +210,7 @@ contract AmmPair is IAmmPair, AmmERC20 {
             "AmmPair: INSUFFICIENT_INPUT_AMOUNT"
         );
         { // scope for reserve{0,1}Adjusted, avoids stack too deep errors
-            uint balance0Adjusted = (balance0.mul(10000).sub(amount0In.mul(0)));
-            uint balance1Adjusted = (balance1.mul(10000).sub(amount1In.mul(0)));
-            require(balance0Adjusted.mul(balance1Adjusted) >= uint(_reserve0).mul(_reserve1).mul(10000**2), 'Pancake: K');
+            require(balance0.mul(balance1) >= uint(_reserve0).mul(_reserve1), 'AmmPair: K');
         }
 
 
