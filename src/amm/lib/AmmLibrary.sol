@@ -35,7 +35,7 @@ library AmmLibrary {
                             hex"ff",
                             factory,
                             keccak256(abi.encodePacked(token0, token1)),
-                            hex"a700b84dfe8b00a3d1990239937527a5c0155f6733feeda4b69d979b100d0738" // init code hash
+                            hex"bcaebde6d8d9f3f74eac5c75fde2768390ff5ae0f8c78c71b8568e2d79036dc2" // init code hash
                         )
                     )
                 )
