@@ -26,7 +26,7 @@ contract AmmFactory is IAmmFactory {
     function createPair(
         address tokenA,
         address tokenB
-    ) external returns (address pair) {
+    ) public virtual returns (address pair) {
         require(tokenA != tokenB, "Amm: IDENTICAL_ADDRESSES");
         (address token0, address token1) = tokenA < tokenB
             ? (tokenA, tokenB)

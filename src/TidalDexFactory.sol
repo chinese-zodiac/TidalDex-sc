@@ -4,6 +4,4 @@ pragma solidity ^0.8.23;
 
 import {AmmFactory} from "./amm/AmmFactory.sol";
 
-contract TidalDexFactory is AmmFactory {
-
-}
+contract TidalDexFactory is AmmFactory {}
