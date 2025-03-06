@@ -6,21 +6,24 @@
 
 ### BSC Testnet
 
-| Contract                          | Address                                    |
-| --------------------------------- | ------------------------------------------ |
-| Factory                           | 0x907e8C7D471877b4742dA8aA53d257d0d565A47E |
-| Router                            | 0x71aB950a0C349103967e711b931c460E9580c631 |
-| FarmMaster                        | 0x348CF34aCD0aB88c3364037486234AB6cbC31C4d |
+| Contract   | Address                                    |
+| ---------- | ------------------------------------------ |
+| Factory    | 0x907e8C7D471877b4742dA8aA53d257d0d565A47E |
+| Router     | 0x71aB950a0C349103967e711b931c460E9580c631 |
+| FarmMaster | 0x348CF34aCD0aB88c3364037486234AB6cbC31C4d |
+| AmmZapV1   | 0x60bC8b98cE4c252Bb75a391C63C46Db75e6b89B0 |
 
 ### BSC Mainnet
 
-| Contract                          | Address                                    |
-| --------------------------------- | ------------------------------------------ |
-| Factory                           | 0x907e8C7D471877b4742dA8aA53d257d0d565A47E |
-| Router                            | 0x71aB950a0C349103967e711b931c460E9580c631 |
-| FarmMaster                        | 0x348CF34aCD0aB88c3364037486234AB6cbC31C4d |
+| Contract   | Address                                    |
+| ---------- | ------------------------------------------ |
+| Factory    | 0x907e8C7D471877b4742dA8aA53d257d0d565A47E |
+| Router     | 0x71aB950a0C349103967e711b931c460E9580c631 |
+| FarmMaster | 0x348CF34aCD0aB88c3364037486234AB6cbC31C4d |
+| AmmZapV1   | 0x60bC8b98cE4c252Bb75a391C63C46Db75e6b89B0 |
 
 ## build
+
 forge build --via-ir
 
 ## deployment

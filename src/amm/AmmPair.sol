@@ -209,10 +209,13 @@ contract AmmPair is IAmmPair, AmmERC20 {
             amount0In > 0 || amount1In > 0,
             "AmmPair: INSUFFICIENT_INPUT_AMOUNT"
         );
-        { // scope for reserve{0,1}Adjusted, avoids stack too deep errors
-            require(balance0.mul(balance1) >= uint(_reserve0).mul(_reserve1), 'AmmPair: K');
+        {
+            // scope for reserve{0,1}Adjusted, avoids stack too deep errors
+            require(
+                balance0.mul(balance1) >= uint(_reserve0).mul(_reserve1),
+                "AmmPair: K"
+            );
         }
-
 
         _update(balance0, balance1, _reserve0, _reserve1);
         emit Swap(msg.sender, amount0In, amount1In, amount0Out, amount1Out, to);

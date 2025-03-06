@@ -93,8 +93,9 @@ contract AmmZapV1 is Ownable, ReentrancyGuard {
     constructor(
         address _WBNBAddress,
         address _pancakeRouter,
+        address _owner,
         uint256 _maxZapReverseRatio
-    ) Ownable(msg.sender) {
+    ) Ownable(_owner) {
         WBNBAddress = _WBNBAddress;
         WBNB = IWETH(_WBNBAddress);
         pancakeRouterAddress = _pancakeRouter;
