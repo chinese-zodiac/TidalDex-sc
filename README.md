@@ -22,6 +22,14 @@
 | FarmMaster | 0x348CF34aCD0aB88c3364037486234AB6cbC31C4d |
 | AmmZapV1   | 0x60bC8b98cE4c252Bb75a391C63C46Db75e6b89B0 |
 
+## Optional Deployments
+
+### BSC Mainnet
+
+| Contract     | Address                                    |
+| ------------ | ------------------------------------------ |
+| CL8Y Burn&LP | 0x2F5BFB8eBcb07C2ee0a210c59453D6A6f1Bd50a6 |
+
 ## build
 
 forge build --via-ir
