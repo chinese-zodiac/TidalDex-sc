@@ -36,12 +36,6 @@ contract TokenBurningAndLP is AccessControlEnumerable {
     /// @notice The liquidity ratio in basis points (10000 = 100%)
     uint256 public immutable liquidityRatio;
 
-    /// @notice Event emitted when liquidity is added to the AMM pool
-    event LiquidityAdded(uint256 subjectTokenAmount, uint256 baseTokenAmount);
-
-    /// @notice Event emitted when tokens are burned
-    event TokensBurned(uint256 amount);
-
     /**
      * @notice Initializes the TokenBurningAndLP contract
      * @param _admin Address that will be granted the DEFAULT_ADMIN_ROLE
@@ -90,6 +84,32 @@ contract TokenBurningAndLP is AccessControlEnumerable {
     }
 
     /**
+     * @notice Swaps the intermediate token for the base token
+     * @dev Restricted to SWAPPER_ROLE to prevent sandwich attacks
+     * @param _minAmountOut The minimum amount of base token to receive
+     */
+    function swapIntermediateTokenForBaseToken(
+        uint256 _amount,
+        uint256 _minAmountOut
+    ) external onlyRole(SWAPPER_ROLE) {
+        // Swap the intermediate token for the base token
+        address[] memory path = new address[](2);
+        path[0] = address(intermediateToken);
+        path[1] = address(baseToken);
+        intermediateToken.approve(
+            address(router),
+            intermediateToken.balanceOf(address(this))
+        );
+        router.swapExactTokensForTokensSupportingFeeOnTransferTokens(
+            _amount,
+            _minAmountOut,
+            path,
+            address(this),
+            block.timestamp
+        );
+    }
+
+    /**
      * @notice Swaps any received token for the base token
      * @dev Restricted to SWAPPER_ROLE to prevent sandwich attacks
      * @param _receivedToken The token to swap for the base token
@@ -132,8 +152,8 @@ contract TokenBurningAndLP is AccessControlEnumerable {
         // Amount to NOT swap is the liquidity ratio basis points divided by 2
         // half of the liquidity ratio is used to swap the base token for the subject token
         // Remainder is burned
-        uint256 amountToNotSwap = ((_amount * liquidityRatio) / 2) / 10_000;
-        uint256 amountToSwap = _amount - amountToNotSwap;
+        uint256 amountForLP = ((_amount * liquidityRatio) / 2) / 10_000;
+        uint256 amountToSwap = _amount - amountForLP;
 
         // Swap the base token for the subject token
         address[] memory path = new address[](2);
@@ -160,24 +180,18 @@ contract TokenBurningAndLP is AccessControlEnumerable {
         );
         baseToken.approve(address(router), baseToken.balanceOf(address(this)));
 
-        emit LiquidityAdded(
-            subjectToken.balanceOf(address(this)),
-            baseToken.balanceOf(address(this))
-        );
-
         // Mint LP
         router.addLiquidity(
             address(subjectToken),
             address(baseToken),
-            subjectToken.balanceOf(address(this)),
-            baseToken.balanceOf(address(this)),
+            (subjectToken.balanceOf(address(this)) * amountToSwap) /
+                amountToSwap,
+            amountForLP, // amount of base that was not swapped, so that it is available for liquidity
             1,
             1,
             address(0x0000000000000000000000000000000000000000), //Burn address
             block.timestamp
         );
-
-        emit TokensBurned(subjectToken.balanceOf(address(this)));
 
         // Burn the subject token
         subjectToken.burn(subjectToken.balanceOf(address(this)));

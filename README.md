@@ -28,7 +28,7 @@
 
 | Contract     | Address                                    |
 | ------------ | ------------------------------------------ |
-| CL8Y Burn&LP | 0x2F5BFB8eBcb07C2ee0a210c59453D6A6f1Bd50a6 |
+| CL8Y Burn&LP | 0x7DB1c089074CCe43fAE87Fa28D1Fef79558918d2 |
 
 ## build
 
