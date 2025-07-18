@@ -26,9 +26,10 @@
 
 ### BSC Mainnet
 
-| Contract     | Address                                    |
-| ------------ | ------------------------------------------ |
-| CL8Y Burn&LP | 0x7DB1c089074CCe43fAE87Fa28D1Fef79558918d2 |
+| Contract       | Address                                    |
+| -------------- | ------------------------------------------ |
+| CL8Y Burn&LP   | 0x7DB1c089074CCe43fAE87Fa28D1Fef79558918d2 |
+| Rescue LP Tool | 0xB7e8185Dd927FC6e721df666B6955Ea83DABC8D9 |
 
 ## build
 
