@@ -4,14 +4,14 @@ pragma solidity ^0.8.23;
 
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {ERC20Pausable} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
-import {IERC20Mintable} from "./interfaces/IERC20Mintable.sol";
-import {IERC20Burnable} from "./interfaces/IERC20Burnable.sol";
-import {IAmmPair} from "./interfaces/IAmmPair.sol";
+import {IERC20Mintable} from "../interfaces/IERC20Mintable.sol";
+import {IERC20Burnable} from "../interfaces/IERC20Burnable.sol";
+import {IAmmPair} from "../interfaces/IAmmPair.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
-import {TidalDexRouter} from "./TidalDexRouter.sol";
-import {TidalDexFactory} from "./TidalDexFactory.sol";
+import {TidalDexRouter} from "../TidalDexRouter.sol";
+import {TidalDexFactory} from "../TidalDexFactory.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import {IPausable} from "./interfaces/IPausable.sol";
+import {IPausable} from "../interfaces/IPausable.sol";
 
 contract RescueTokenFromLPViaMintTool is Ownable, ReentrancyGuard {
     address public constant czusd = 0xE68b79e51bf826534Ff37AA9CeE71a3842ee9c70;

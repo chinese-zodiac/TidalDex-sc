@@ -30,6 +30,7 @@
 | -------------- | ------------------------------------------ |
 | CL8Y Burn&LP   | 0x7DB1c089074CCe43fAE87Fa28D1Fef79558918d2 |
 | Rescue LP Tool | 0xB7e8185Dd927FC6e721df666B6955Ea83DABC8D9 |
+| ChartBoost     | 0xc441D12e7Aa01DC0e8661f8a7daAE73337da16D3 |
 
 ## build
 

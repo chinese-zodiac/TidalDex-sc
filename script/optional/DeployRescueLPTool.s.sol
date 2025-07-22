@@ -3,7 +3,7 @@ pragma solidity ^0.8.23;
 
 import {Script} from "forge-std/Script.sol";
 
-import {RescueTokenFromLPViaMintTool} from "../../src/RescueLPTool.sol";
+import {RescueTokenFromLPViaMintTool} from "../../src/optional/RescueLPTool.sol";
 
 contract DeployRescueLPTool is Script {
     RescueTokenFromLPViaMintTool public rescueLPTool;
